@@ -12,7 +12,7 @@ if (isset($_GET['id'])) {
 
      if ($result == TRUE) {
 
-        echo "Record deleted successfully.";
+        echo "Record deleted successfully!";
         header( "refresh:2; url=./view.php" ); 
 
     }else{
