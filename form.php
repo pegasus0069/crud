@@ -19,7 +19,8 @@ include "db.php";
 
     if ($result == TRUE) {
 
-      echo "New record created successfully!";
+      echo '<div class="alert alert-success" role="alert">New record created successfully!</div>';
+      echo "<script>console.log('New record created successfully!');</script>";
       header( "refresh:2; url=./view.php" ); 
 
     }else{
@@ -37,53 +38,56 @@ include "db.php";
 
 <html>
 
+<head>
+  <title>Signup Form</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
 <body>
 
-<h2>Signup Form</h2>
+<div class="container">
+  <h2>Signup Form</h2>
 
-<form action="" method="POST">
+  <form action="" method="POST">
 
-  <fieldset>
+    <fieldset>
 
-    <legend>Personal information:</legend>
+      <legend>Personal information:</legend>
 
-    First name:<br>
+      <div class="form-group">
+        <label for="firstname">First name:</label>
+        <input type="text" class="form-control" name="firstname" id="firstname">
+      </div>
 
-    <input type="text" name="firstname">
+      <div class="form-group">
+        <label for="lastname">Last name:</label>
+        <input type="text" class="form-control" name="lastname" id="lastname">
+      </div>
 
-    <br>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" name="email" id="email">
+      </div>
 
-    Last name:<br>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" name="password" id="password">
+      </div>
 
-    <input type="text" name="lastname">
+      <div class="form-group">
+        <label for="gender">Gender:</label><br>
+        <input type="radio" name="gender" value="Male">Male
+        <input type="radio" name="gender" value="Female">Female
+      </div>
 
-    <br>
+      <input type="submit" name="submit" value="Submit" class="btn btn-primary">
 
-    Email:<br>
+    </fieldset>
 
-    <input type="email" name="email">
+  </form>
+</div>
 
-    <br>
-
-    Password:<br>
-
-    <input type="password" name="password">
-
-    <br>
-
-    Gender:<br>
-
-    <input type="radio" name="gender" value="Male">Male
-
-    <input type="radio" name="gender" value="Female">Female
-
-    <br><br>
-
-    <input type="submit" name="submit" value="Submit">
-
-  </fieldset>
-
-</form>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 </body>
 

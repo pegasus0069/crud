@@ -2,36 +2,39 @@
 
 include "db.php";
 
-    if (isset($_POST['update'])) {
+if (isset($_POST['update'])) {
 
-        $firstname = $_POST['firstname'];
+    $firstname = $_POST['firstname'];
 
-        $user_id = $_POST['user_id'];
+    $user_id = $_POST['user_id'];
 
-        $lastname = $_POST['lastname'];
+    $lastname = $_POST['lastname'];
 
-        $email = $_POST['email'];
+    $email = $_POST['email'];
 
-        $password = $_POST['password'];
+    $password = $_POST['password'];
 
-        $gender = $_POST['gender']; 
+    $gender = $_POST['gender']; 
 
-        $sql = "UPDATE `users` SET `firstname`='$firstname',`lastname`='$lastname',`email`='$email',`password`='$password',`gender`='$gender' WHERE `id`='$user_id'"; 
+    $sql = "UPDATE `users` SET `firstname`='$firstname',`lastname`='$lastname',`email`='$email',`password`='$password',`gender`='$gender' WHERE `id`='$user_id'"; 
 
-        $result = $conn->query($sql); 
+    $result = $conn->query($sql); 
 
-        if ($result == TRUE) {
+    if ($result == TRUE) {
 
-            echo "Record updated successfully.";
-            header( "refresh:2; url=./view.php" ); 
+        echo '<div class="alert alert-success" role="alert">';
+        echo 'Record updated successfully.';
+        echo '</div>';
+        echo "<script>console.log('Record updated successfully.');</script>";
+        header( "refresh:2; url=./view.php" ); 
 
-        }else{
+    }else{
 
-            echo "Error:" . $sql . "<br>" . $conn->error;
+        echo "Error:" . $sql . "<br>" . $conn->error;
 
-        }
+    }
 
-    } 
+} 
 
 if (isset($_GET['id'])) {
 
@@ -61,6 +64,14 @@ if (isset($_GET['id'])) {
 
     ?>
 
+    <html>
+    <head>
+        <title>User Update Form</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+    <body>
+
+    <div class="container">
         <h2>User Update Form</h2>
 
         <form action="" method="post">
@@ -69,49 +80,43 @@ if (isset($_GET['id'])) {
 
             <legend>Personal information:</legend>
 
-            First name:<br>
-
-            <input type="text" name="firstname" value="<?php echo $first_name; ?>">
+            <div class="form-group">
+                <label for="firstname">First name:</label>
+                <input type="text" class="form-control" name="firstname" value="<?php echo $first_name; ?>">
+            </div>
 
             <input type="hidden" name="user_id" value="<?php echo $id; ?>">
 
-            <br>
+            <div class="form-group">
+                <label for="lastname">Last name:</label>
+                <input type="text" class="form-control" name="lastname" value="<?php echo $lastname; ?>">
+            </div>
 
-            Last name:<br>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" name="email" value="<?php echo $email; ?>">
+            </div>
 
-            <input type="text" name="lastname" value="<?php echo $lastname; ?>">
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" class="form-control" name="password" value="<?php echo $password; ?>">
+            </div>
 
-            <br>
+            <div class="form-group">
+                <label for="gender">Gender:</label><br>
+                <input type="radio" name="gender" value="Male" <?php if($gender == 'Male'){ echo "checked";} ?>> Male
+                <input type="radio" name="gender" value="Female" <?php if($gender == 'Female'){ echo "checked";} ?>> Female
+            </div>
 
-            Email:<br>
-
-            <input type="email" name="email" value="<?php echo $email; ?>">
-
-            <br>
-
-            Password:<br>
-
-            <input type="password" name="password" value="<?php echo $password; ?>">
-
-            <br>
-
-            Gender:<br>
-
-            <input type="radio" name="gender" value="Male" <?php if($gender == 'Male'){ echo "checked";} ?> >Male
-
-            <input type="radio" name="gender" value="Female" <?php if($gender == 'Female'){ echo "checked";} ?>>Female
-
-            <br><br>
-
-            <input type="submit" value="Update" name="update">
+            <input type="submit" class="btn btn-primary" value="Update" name="update">
 
           </fieldset>
 
         </form> 
+    </div>
 
-        </body>
-
-        </html> 
+    </body>
+    </html> 
 
     <?php
 
@@ -123,4 +128,4 @@ if (isset($_GET['id'])) {
 
 }
 
-?> 
+?>
